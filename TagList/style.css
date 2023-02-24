@@ -1,0 +1,84 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: cursive;
+}
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+.tag-control {
+  width: 27rem;
+  background-color: white;
+  box-shadow: 0px 0px 2px 2px rgb(91, 91, 91);
+  padding: 0.2rem;
+}
+#tag-input {
+  border: none;
+  outline: none;
+  display: inline-block;
+  margin: 0.4rem;
+}
+#tag-item li {
+  margin: 0.1rem;
+  list-style: none;
+  display: inline-block;
+  background-color: rgba(203, 203, 203, 0.4);
+  padding: 0.4rem 1.4rem;
+  border-radius: 0.3rem;
+}
+ul {
+  display: block;
+  list-style: none;
+}
+.recommendation .item li {
+  display: block;
+}
+.recommendation {
+  width: 27rem;
+  background-color: #f5f5f5;
+  box-shadow: 0px 0px 2px 2px rgb(166, 166, 166);
+  display: none;
+  transition: all 0.2s ease-in-out;
+}
+.recommendation .item:nth-child(1) {
+  margin-top: 0.5rem;
+}
+.item {
+  padding: 7px 10px;
+  margin: 0.1rem;
+  transition: all 0.1s ease-in-out;
+}
+.item:hover {
+  background-color: silver;
+}
+li b {
+  cursor: pointer;
+  background-color: darkcyan;
+  padding: 2px 8px;
+  border-radius: 50%;
+}
+li {
+  color: white;
+  display: none;
+}
+li span {
+  padding: 5px 10px;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+.item-rec .new-item.item {
+  color: black;
+}
+.dis-block {
+  display: block;
+}
+.dis-none {
+  display: none;
+}

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="tag-control">
+      <ul id="tag-item">
+        <input type="text" id="tag-input" />
+      </ul>
+    </div>
+    <div class="recommendation">
+      <ul class="item-rec">
+        <li class="item new-item">New: <span></span></li>
+      </ul>
+    </div>
+  </div>
+  <script>
+    const tag_item = document.getElementById('tag-item');
+    const tag_input = document.getElementById('tag-input');
+    const color_input = [];
+    const recommendation = document.querySelector('.recommendation');
+    const item_rec = document.querySelector('.item-rec');
+    const new_item = document.querySelector('.new-item');
+    window.addEventListener('load', async function () {
+      await getRec();
+      const all_item = document.querySelectorAll('.item');
+      tag_input.addEventListener('focus', async function (e) {
+        recommendation.style.display = 'block';
+        getRemocen(e);
+        // Enter Logic
+        tag_input.addEventListener('keypress', async function (e) {
+          if (e.code == 'Enter' && e.target.value) {
+            const random_color = Math.floor(Math.random() * 4);
+            const li = document.createElement('li');
+            li.innerHTML = `${e.target.value} <b class="close">X</b>`;
+            li.style.backgroundColor = color_input[random_color];
+            tag_item.insertBefore(li, tag_input);
+            e.target.value = '';
+            getRemocen(e);
+          }
+        });
+
+        // Search
+        tag_input.addEventListener('input', function (e) {
+          getRemocen(e);
+        });
+      });
+
+      function getRemocen(e) {
+        if (e.target.value) {
+          new_item.classList.add('dis-block');
+          new_item.classList.remove('dis-none');
+          new_item.children[0].innerHTML = e.target.value;
+        } else {
+          new_item.classList.remove('dis-block');
+          new_item.classList.add('dis-none');
+        }
+        all_item.forEach((el) => {
+          const selected_el = el.children[0].innerHTML.toLowerCase();
+          const input_lower = tag_input.value.toLowerCase();
+          if (selected_el.includes(input_lower)) {
+            el.classList.add('dis-block');
+          } else {
+            el.classList.remove('dis-block');
+          }
+        });
+      }
+    });
+    async function getRec() {
+      const color = await getTagList();
+      color.map((e, i) => {
+        color_input.push(e.color);
+        const li = document.createElement('li');
+        const span = document.createElement('span');
+        span.style.backgroundColor = e.color;
+        span.innerHTML = e.name;
+        li.classList.add('item');
+        li.appendChild(span);
+        item_rec.appendChild(li);
+      });
+    }
+    async function getTagList() {
+      // Cross Origin Requests Are Only Supported For Protocol Schemes: Http, Data, Chrome, Chrome-Extension, Chrome-Untrusted, Https
+      // const fetching_data = await fetch('taglist.json', {
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //     'Accept': 'application/json',
+      //   }
+      // });
+      // const data = await fetching_data.json();
+      const data = [
+        {
+          "id": 1,
+          "name": "Web-Technologies",
+          "color": "chartreuse"
+        },
+        {
+          "id": 2,
+          "name": "Mobile",
+          "color": "crimson"
+        },
+        {
+          "id": 3,
+          "name": "Desktop",
+          "color": "royalblue"
+        },
+        {
+          "id": 4,
+          "name": "UI/UX",
+          "color": "teal"
+        }
+      ]
+
+      return data;
+    }
+    item_rec.addEventListener('click', function (e) {
+      if (e.target.closest('span')) {
+        const li = document.createElement('li');
+        li.innerHTML = `${e.target.innerHTML} <b class="close">X</b>`;
+        li.style.backgroundColor = e.target.style.backgroundColor;
+        tag_item.insertBefore(li, tag_input);
+        tag_input.value = '';
+      }
+    });
+    tag_item.addEventListener('click', function (e) {
+      if (e.target.className == 'close') {
+        e.target.parentElement.remove(e.target);
+      }
+    });
+  </script>
+</body>
+
+</html>
