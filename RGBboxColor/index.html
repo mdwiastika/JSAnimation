@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="block"></div>
+      <div class="rgb-option">
+        <input type="range" name="red" id="red" />
+        <span id="r-value">0</span>
+        <input type="range" name="green" id="green" />
+        <span id="g-value">0</span>
+        <input type="range" name="blue" id="blue" />
+        <span id="b-value">0</span>
+      </div>
+    </div>
+    <script>
+      const block = document.querySelector('.block');
+      const red_input = document.getElementById('red');
+      const green_input = document.getElementById('green');
+      const blue_input = document.getElementById('blue');
+      const r_show = document.getElementById('r-value');
+      const g_show = document.getElementById('g-value');
+      const b_show = document.getElementById('b-value');
+      let r_value, g_value, b_value;
+      convertInput();
+      setRGBBlock(r_value, g_value, b_value);
+      showRGBNumber(r_value, g_value, b_value);
+      red_input.addEventListener('input', function (e) {
+        convertInput();
+        setRGBBlock(r_value, g_value, b_value);
+        showRGBNumber(r_value, g_value, b_value);
+      });
+      green_input.addEventListener('input', function (e) {
+        convertInput();
+        setRGBBlock(r_value, g_value, b_value);
+        showRGBNumber(r_value, g_value, b_value);
+      });
+      blue_input.addEventListener('input', function (e) {
+        convertInput();
+        setRGBBlock(r_value, g_value, b_value);
+        showRGBNumber(r_value, g_value, b_value);
+      });
+
+      function setRGBBlock(r, g, b) {
+        block.style.backgroundColor = `rgb(${r},${g},${b})`;
+      }
+      function convertInput() {
+        r_value = Math.round((red_input.value / 100) * 255);
+        g_value = Math.round((green_input.value / 100) * 255);
+        b_value = Math.round((blue_input.value / 100) * 255);
+        console.log(r_value, g_value, b_value);
+      }
+      function showRGBNumber(r, g, b) {
+        r_show.innerHTML = r.toString().padStart(3, '0');
+        g_show.innerHTML = g.toString().padStart(3, '0');
+        b_show.innerHTML = b.toString().padStart(3, '0');
+      }
+    </script>
+  </body>
+</html>
