@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Clock</title>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div id="app">
+    <div class="clock">
+      <div class="arrow">
+        <div></div>
+        <div></div>
+      </div>
+      <div class="hour"></div>
+      <div class="minute"></div>
+      <div class="second"></div>
+      <div class="number number1" style="--ii: 1"><b>1</b></div>
+      <div class="number number2" style="--ii: 2"><b>2</b></div>
+      <div class="number number3" style="--ii: 3"><b>3</b></div>
+      <div class="number number4" style="--ii: 4"><b>4</b></div>
+      <div class="number number5" style="--ii: 5"><b>5</b></div>
+      <div class="number number6" style="--ii: 6"><b>6</b></div>
+      <div class="number number7" style="--ii: 7"><b>7</b></div>
+      <div class="number number8" style="--ii: 8"><b>8</b></div>
+      <div class="number number9" style="--ii: 9"><b>9</b></div>
+      <div class="number number10" style="--ii: 10"><b>10</b></div>
+      <div class="number number11" style="--ii: 11"><b>11</b></div>
+      <div class="number number12" style="--ii: 12"><b>12</b></div>
+    </div>
+  </div>
+
+  <script>
+    const hour_arrow = document.querySelector('.hour');
+    const minute_arrow = document.querySelector('.minute');
+    const second_arrow = document.querySelector('.second');
+    const arrow = document.querySelector('.arrow');
+    rotateArrow();
+    setInterval(rotateArrow, 1000);
+    function rotateArrow() {
+      const new_date = new Date();
+      const get_hour = new_date.getHours() >= 12 ? new_date.getHours() % 12 : new_date.getHours();
+      const add_minute_deg_to_hour = (new_date.getMinutes() / 60) * 30;
+      const hour_deg = ((get_hour / 12) * 360) + add_minute_deg_to_hour;
+      const minute_deg = (new_date.getMinutes() / 60) * 360;
+      const second_deg = (new_date.getSeconds() / 60) * 360;
+      hour_arrow.style.setProperty('--hour', `${hour_deg}deg`);
+      minute_arrow.style.setProperty('--minute', `${minute_deg}deg`);
+      second_arrow.style.setProperty('--second', `${second_deg}deg`);
+      arrow.style.setProperty('--second', `${second_deg}deg`);
+    }
+  </script>
+</body>
+
+</html>
