@@ -1,0 +1,40 @@
+body {
+  background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(37, 145, 251, 0.98) 0.1%, rgba(0, 7, 128, 1) 99.8%);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.digital {
+  color: white;
+  font-size: 7rem;
+}
+.action-button button {
+  padding: 0.6rem;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+#start-timer {
+  background-color: rgb(115, 222, 7);
+}
+#stop-timer {
+  background-color: darkorange;
+}
+#reset-timer {
+  background-color: crimson;
+}
+.action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}

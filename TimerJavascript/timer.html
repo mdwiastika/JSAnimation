@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="timer">
+        <div class="digital">000:00:00</div>
+        <div class="action-button">
+          <button id="start-timer">Start Timer</button>
+          <button id="stop-timer">Stop Timer</button>
+          <button id="reset-timer">Reset Timer</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      const start_button = document.getElementById('start-timer');
+      const stop_button = document.getElementById('stop-timer');
+      const reset_button = document.getElementById('reset-timer');
+      const digital = document.querySelector('.digital');
+      let start_clicked = false;
+      let stop_clicked = false;
+      let reset_clicked = false;
+      let digital_timer = 0;
+      let start_interval;
+      let second_timer, minute_timer, hour_timer;
+      let slice_hour, slice_minute, slice_second;
+      start_button.addEventListener('click', function () {
+        if (!start_clicked) {
+          stop_clicked = false;
+          reset_clicked = false;
+          start_interval = setInterval(startTimer, 1000);
+          function startTimer() {
+            digital_timer += 1;
+            // hour logic
+            hour_timer = Math.floor(digital_timer / 3600)
+              .toString()
+              .padStart(3, '0');
+            slice_hour = digital_timer % 3600;
+
+            // minute logic
+            minute_timer = Math.floor(slice_hour / 60)
+              .toString()
+              .padStart(2, '0');
+            slice_minute = slice_hour % 60;
+
+            // second logic
+            second_timer = slice_minute.toString().padStart(2, '0');
+            console.log(slice_minute);
+            if (second_timer < 9) {
+              if (minute_timer < 9) {
+                if (hour_timer < 9) {
+                }
+              }
+            }
+            digital.innerHTML = `${hour_timer}:${minute_timer}:${second_timer}`;
+          }
+          start_clicked = true;
+        } else {
+          console.log('gagal');
+        }
+      });
+      stop_button.addEventListener('click', function () {
+        if (!stop_clicked && start_clicked) {
+          clearInterval(start_interval);
+          start_clicked = false;
+          reset_clicked = false;
+          stop_clicked = true;
+        } else {
+          console.log('gagal');
+        }
+      });
+      reset_button.addEventListener('click', function () {
+        if (!reset_clicked) {
+          start_clicked = false;
+          stop_clicked = false;
+          clearInterval(start_interval);
+          reset_clicked = true;
+          digital_timer = 0;
+          digital.innerHTML = '000:00:00';
+        } else {
+          console.log('gagal');
+        }
+      });
+    </script>
+  </body>
+</html>
